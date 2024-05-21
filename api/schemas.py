@@ -8,9 +8,16 @@ class TunedModel(BaseModel):
 
 
 class CheckDataResponse(TunedModel):
+    phone: str
     address: str
 
 
 class WriteData(BaseModel):
+    phone: str
+    address: str
+
+
+class WriteDataResponse(TunedModel):
+    status: bool
     phone: str
     address: str

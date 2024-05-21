@@ -1,5 +1,5 @@
 up:
-	docker compose -f docker-compose-local.yaml up -d
+	docker compose -f docker-compose-local.yaml up -d --build
 
 stop:
 	docker compose -f docker-compose-local.yaml stop
