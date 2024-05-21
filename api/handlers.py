@@ -33,13 +33,16 @@ async def get_address_by_phone(phone: str, db=Depends(get_redis)):
 
 @data_router.put("/Write_data")
 async def update_phone(body: WriteData, db=Depends(get_redis)):
-    return body
-
-    # try:
-    #     updated = await _get_address_by_phone(body.phone, db)
-    #     if updated is None:
-    #         raise HTTPException(status_code=404, detail=f"Phone {body.phone} not found")
-    #     return updated
-    # except Exception as err:
-    #     raise HTTPException(status_code=503, detail=f"Database error: {err}")
+    try:
+        updated = await _get_address_by_phone(body.phone, db)
+        if updated is None:
+            raise HTTPException(status_code=404, detail=f"Phone {body.phone} not found")
+        status = await _create_new_phone(body, db)
+        return WriteDataResponse(
+            status=status,
+            phone=body.phone,
+            address=body.address
+        )
+    except Exception as err:
+        raise HTTPException(status_code=503, detail=f"Database error: {err}")
 
