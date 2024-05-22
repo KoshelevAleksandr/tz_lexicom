@@ -33,8 +33,3 @@ class WriteDataResponse(TunedModel):
     status: bool
     phone: str
     address: str
-
-
-class DeletePhoneResponse(TunedModel):
-    status: bool
-    phone: str

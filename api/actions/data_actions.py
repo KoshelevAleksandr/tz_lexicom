@@ -17,7 +17,7 @@ async def _create_new_phone(body: WriteData, session) -> bool:
 
 async def _get_address_by_phone(phone, session) -> Union[CheckDataResponse, None]:
     """
-    Get the address by phone
+    Get address by phone
     """
     data_dal = DataDAL(session)
     address = await data_dal.get_address(
@@ -29,7 +29,7 @@ async def _get_address_by_phone(phone, session) -> Union[CheckDataResponse, None
 
 async def _update_phone(body: WriteData, session) -> bool:
     """
-    Сhanging the address by phone
+    Сhanging address by phone
     """
     data_dal = DataDAL(session)
     return await data_dal.update_address(
@@ -39,6 +39,9 @@ async def _update_phone(body: WriteData, session) -> bool:
 
 
 async def _delete_new_phone(phone, session) -> bool:
+    """
+    Delete address by phone
+    """
     data_dal = DataDAL(session)
     status = await data_dal.delete_address(
         phone=phone,
