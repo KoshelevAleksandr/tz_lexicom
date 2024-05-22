@@ -15,7 +15,7 @@ async def _create_new_phone(body: WriteData, session) -> bool:
     )
 
 
-async def _get_address_by_phone(phone, session) -> Union[CheckDataResponse, None]:
+async def _get_address_by_phone(phone, session) -> Union[str, None]:
     """
     Get address by phone
     """
