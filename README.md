@@ -4,7 +4,7 @@
 
 ##### Команда для запуска сервиса:
 
-``docker compose -f docker-compose-local.yaml up -d --build``
+``docker-compose -f docker-compose-local.yaml up -d --build``
 или
 ``Make up``
 
