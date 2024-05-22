@@ -1,9 +1,11 @@
 FROM python:3.9
 
-RUN mkdir /fastapi_app
+RUN mkdir /tz_lexicom
 
-WORKDIR /fastapi_app
+WORKDIR /tz_lexicom
 
-COPY . .
+COPY ./requirements.txt .
 
 RUN python3 -m pip install -r requirements.txt
+
+COPY . .
