@@ -1,6 +1,17 @@
 # tz_lexicom
 
-Команда для запуска сервиса:
-``- docker-compose up --build``
-или 
+1. Небходимо разработать сервис с использование FastAPI и Redis.
+
+##### Команда для запуска сервиса:
+
+``docker compose -f docker-compose-local.yaml up -d --build``
+или
 ``Make up``
+
+2. Даны 2 таблица PostgreSQL. Необходимо перенести данные о статусе из таблица short_name в таблицу fuul_name.
+
+``UPDATE full_names fn
+SET status = sn.status
+FROM short_names sn
+WHERE sn.name = LEFT(fn.name ,POSITION('.' in fn.name)-1) or sn.name = fn.name
+``
