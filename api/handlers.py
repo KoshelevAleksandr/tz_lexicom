@@ -31,7 +31,7 @@ async def get_address_by_phone(phone: str, db=Depends(get_redis)):
     return CheckDataResponse(phone=phone, address=address)
 
 
-@data_router.put("/Write_data")
+@data_router.put("/Write_data", response_model=WriteDataResponse)
 async def update_phone(body: WriteData, db=Depends(get_redis)):
     try:
         phone_for_deletion = await _get_address_by_phone(body.phone, db)

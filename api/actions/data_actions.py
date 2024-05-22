@@ -38,7 +38,7 @@ async def _update_phone(body: WriteData, session) -> bool:
     )
 
 
-async def _delete_new_phone(phone, session) -> bool:
+async def _delete_new_phone(phone, session):
     """
     Delete address by phone
     """
