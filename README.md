@@ -8,10 +8,10 @@
 или
 ``Make up``
 
-2. Даны 2 таблица PostgreSQL. Необходимо перенести данные о статусе из таблица short_name в таблицу fuul_name.
+2. Даны 2 таблица PostgreSQL. Необходимо перенести данные о статусе из таблицы short_name в таблицу full_name.
 
 ``UPDATE full_names fn
 SET status = sn.status
 FROM short_names sn
-WHERE sn.name = LEFT(fn.name ,POSITION('.' in fn.name)-1) or sn.name = fn.name
+WHERE sn.name = LEFT(fn.name, POSITION('.' in fn.name) - 1) or sn.name = fn.name
 ``
