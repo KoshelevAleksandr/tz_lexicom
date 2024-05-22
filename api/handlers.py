@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from api.actions.data_actions import _create_new_phone, _get_address_by_phone, _update_phone
+from api.actions.data_actions import _create_new_phone, _get_address_by_phone, _update_phone, _delete_new_phone
 from api.schemas import CheckDataResponse, WriteData, WriteDataResponse
 from db.session import get_redis
 
@@ -34,8 +34,8 @@ async def get_address_by_phone(phone: str, db=Depends(get_redis)):
 @data_router.put("/Write_data")
 async def update_phone(body: WriteData, db=Depends(get_redis)):
     try:
-        updated = await _get_address_by_phone(body.phone, db)
-        if updated is None:
+        phone_for_deletion = await _get_address_by_phone(body.phone, db)
+        if phone_for_deletion is None:
             raise HTTPException(status_code=404, detail=f"Phone {body.phone} not found")
         status = await _create_new_phone(body, db)
         return WriteDataResponse(
@@ -43,6 +43,18 @@ async def update_phone(body: WriteData, db=Depends(get_redis)):
             phone=body.phone,
             address=body.address
         )
+    except Exception as err:
+        raise HTTPException(status_code=503, detail=f"Database error: {err}")
+
+
+@data_router.delete("/Write_data")
+async def delete_phone(phone: str, db=Depends(get_redis)):
+    try:
+        phone_for_deletion = await _get_address_by_phone(phone, db)
+        if phone_for_deletion is None:
+            raise HTTPException(status_code=404, detail=f"Phone {phone} not found")
+        status = await _delete_new_phone(phone, db)
+        return f"Phone {phone} deleted"
     except Exception as err:
         raise HTTPException(status_code=503, detail=f"Database error: {err}")
 

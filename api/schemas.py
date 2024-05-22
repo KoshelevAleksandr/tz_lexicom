@@ -34,10 +34,7 @@ class WriteDataResponse(TunedModel):
     phone: str
     address: str
 
-    @field_validator("phone")
-    def validate_phone(cls, value):
-        if not LETTER_MATCH_PATTERN.match(value):
-            raise HTTPException(
-                status_code=422, detail="Phone should contains only digit"
-            )
-        return value
+
+class DeletePhoneResponse(TunedModel):
+    status: bool
+    phone: str

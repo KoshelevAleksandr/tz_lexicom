@@ -12,3 +12,6 @@ class DataDAL:
 
     async def update_address(self, phone, address):
         return self.db_session.set(phone, address)
+
+    async def delete_address(self, phone):
+        return self.db_session.delete(phone)

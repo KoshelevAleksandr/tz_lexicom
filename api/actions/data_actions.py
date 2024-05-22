@@ -4,7 +4,10 @@ from api.schemas import CheckDataResponse, WriteData
 from db.dals import DataDAL
 
 
-async def _create_new_phone(body: WriteData, session):
+async def _create_new_phone(body: WriteData, session) -> bool:
+    """
+    Create the address by phone
+    """
     data_dal = DataDAL(session)
     return await data_dal.crete_phone(
         phone=body.phone,
@@ -13,6 +16,9 @@ async def _create_new_phone(body: WriteData, session):
 
 
 async def _get_address_by_phone(phone, session) -> Union[CheckDataResponse, None]:
+    """
+    Get the address by phone
+    """
     data_dal = DataDAL(session)
     address = await data_dal.get_address(
         phone=phone,
@@ -21,10 +27,20 @@ async def _get_address_by_phone(phone, session) -> Union[CheckDataResponse, None
         return address
 
 
-
-async def _update_phone(body: WriteData, session):
+async def _update_phone(body: WriteData, session) -> bool:
+    """
+    Сhanging the address by phone
+    """
     data_dal = DataDAL(session)
     return await data_dal.update_address(
         phone=body.phone,
         address=body.address,
     )
+
+
+async def _delete_new_phone(phone, session) -> bool:
+    data_dal = DataDAL(session)
+    status = await data_dal.delete_address(
+        phone=phone,
+    )
+    return status
